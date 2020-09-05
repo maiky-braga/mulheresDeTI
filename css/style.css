@@ -30,6 +30,7 @@ text-align: center;
 .o-main {
 grid-area: main;
 background: #f5f4f2;
+text-align: center;
 }
 
 .o-footer {
@@ -76,3 +77,27 @@ text-decoration: none;
   background: #FFCC66;
   color: #333;
 }
+
+.o-main .centro-centro{
+position: absolute;
+z-index: 99999999;
+left: 50%; top: 50%;
+transform: translate(-50%, -50%);
+}
+
+form{
+  margin: auto auto;
+}
+
+.botao {
+background-color:#FFFFFF;
+border:1px solid #000000;
+border-radius:6px;
+display:inline-block;
+cursor:pointer;
+font-family: Arial, Helvetica, sans-serif;
+font-weight:bold;
+font-size:16px;
+padding:14px 50px;
+text-decoration:none;
+ }

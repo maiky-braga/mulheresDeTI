@@ -1,16 +1,14 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/style.css">
-    <title>LOGIN</title>
+    <title>CADASTRO</title>
 </head>
-
-<body>
 
 <header class="o-header">
     <center>
-        <h3>LOGIN</h3>
+        <h3>CADASTRO</h3>
     </center>
 
 </header>
@@ -24,25 +22,40 @@
         <br>
         <hr>
         <br>
-        <a href="cadastro.php">CADASTRO</a>
+        <a href="login.html">LOGIN</a>
     </div>
 
 </aside>
 
+<body>
 <main class="o-main">
-    <form action="login.php" method="post" >
-        <label for="name">User:</label><br>
-        <input type="email" id="name" name="name" placeholder="duda@email.com" required>
+    <form action = "gravar.php" method = "post">
+        Nome:
         <br>
-        <label for="senha">Senha:</label>
+        <input type="text" name="nome">
         <br>
-        <input type="password" id="senha" name="senha" placeholder="senha" required>
+        Sobrenome:
+        <br>
+        <input type="text" name="sobrenome">
+        <br>
+        E-mail:
+        <br>
+        <input type="text" name="email">
+        <br>
+        Senha:
+        <br>
+        <input type="password" name="senha">
+        <br>
+        Confirmar senha:
+        <br>
+        <input type="password" name="confsenha">
         <br>
         <br>
-        <input type="submit" class="botao" value="ENTRAR">
+        <input type="submit" class="botao" value="CADASTRAR">
     </form>
-</main>
-<footer class="o-footer">
+    </main>
+
+    <footer class="o-footer">
     <center>
         <a href="https://github.com/adudars/mulheresDeTI">
             <image src="./imagens/GitHub.png" alt="TechLadiesRepository"></image>
