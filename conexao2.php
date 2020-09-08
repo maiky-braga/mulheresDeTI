@@ -1,10 +1,16 @@
 <?php
-$servidor = "127.0.0.1:8080";
-$usuario = "admin";
-$senha="jaPs4c50vBfg";
-$dbname="techladies";
 
-//Criar a conexao
-$conn = mysqli_connect($servidor, $usuario, $senha, $dbname);
+    $dbname="techladies";
+    $dbuser="admin";
+    $dbpassword="jaPs4c50vBfg";
+
+    try{
+        $conn=new PDO('mysql:host=localhost;dbname='.$dbname,$dbuser,$dbpassword); #1
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); #2
+    }catch(PDOException $error){
+        return '<h3>Erro de conexão:</h3><p>'.$error->getMessage().'</p>';
+    }
+
 
 ?>
+
