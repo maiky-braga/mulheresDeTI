@@ -1,6 +1,6 @@
 <?php
 
-include_once("conexao.php");
+include_once("conexao2.php");
 
 $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_STRING);
 $sobrenome = filter_input(INPUT_POST, 'sobrenome', FILTER_SANITIZE_STRING);
