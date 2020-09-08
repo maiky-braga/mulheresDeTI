@@ -1,7 +1,7 @@
 <?php
 $servidor = "localhost";
 $usuario = "admin";
-$senha="gi2uNSPr17zs";
+$senha="jaPs4c50vBfg";
 $dbname="techladies";
 
 //Criar a conexao
