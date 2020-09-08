@@ -4,7 +4,7 @@ $servidor = "127.0.0.1";
 $usuario = "admin";
 $senha="jaPs4c50vBfg";
 $dbname="techladies";
-$port="8080";
+$port="3306";
 
 //Criar a conexao
 $conn = mysqli_connect($servidor, $usuario, $senha, $dbname,$port);
