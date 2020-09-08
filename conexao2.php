@@ -6,8 +6,5 @@ $dbname="techladies";
 
 //Criar a conexao
 $conn = mysqli_connect($servidor, $usuario, $senha, $dbname);
-if (!$conn) {
-        die('Erro na conexão: '.mysql_error()); #2
-    }
-    mysql_close(); #3
+
 ?>
