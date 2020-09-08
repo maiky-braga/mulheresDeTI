@@ -16,10 +16,6 @@ $result_usuario = "INSERT INTO usuarios (nome, sobrenome, email, senha, created)
 
 $resultado_usuario = mysqli_query($conn, $result_usuario);
 
-if (mysqli_insert_id($conn)){
-	header("Location: index.html");
-}else{
-	header("Location: index.html");
-}
+
 
 ?>
