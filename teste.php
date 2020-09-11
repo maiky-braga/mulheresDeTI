@@ -1,6 +1,6 @@
 <?php
-    include("./conexao.php");
-    include("./models.php");
+    include("./funcoes/conexao.php");
+    include("./funcoes/models.php");
 
     
 

@@ -1,8 +1,8 @@
 <?php
     
-    include("./models.php");
-    include("./conexao.php");
-    include("./valida_pagina.php");
+    include("./funcoes/models.php");
+    include("./funcoes/conexao.php");
+    include("./funcoes/valida_pagina.php");
     validaHome();
 ?>
 
@@ -22,14 +22,14 @@
         <h3>FEED</h3>
     </div>
     <?php
-        include("./barra_esquerda.php");
+        include("./estrutura/barra_esquerda.php");
     ?>
 
 </aside>
 
 <main class="o-main">
     <section id="post">
-        <form action="./postar.php" method="GET">
+        <form action="./funcoes/postar.php" method="GET">
             <div class="container">
                 <label for="descricao"></label>
                 <input type="text" placeholder="O que você tem a compartilhar?" name="descricao" style="height:150px; border-radius:4px; background: #f5f4f2;">

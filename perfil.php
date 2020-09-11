@@ -1,7 +1,7 @@
 <?php
-    include("./models.php");
-    include("./conexao.php");
-    include("./valida_pagina.php");
+    include("./funcoes/models.php");
+    include("./funcoes/conexao.php");
+    include("./funcoes/valida_pagina.php");
     validaHome();
 ?>
 
@@ -23,20 +23,12 @@
 	    <h3>PERFIL</h3>
     </div>
     <?php
-        include("./barra_esquerda.php");
+        include("./estrutura/barra_esquerda.php");
     ?>
 
 </aside>
 
 <main class="o-main">
-    <!-- Meu perfil - mini menu -->
-    <!-- <section id="meu-perfil" class="mini-menu">
-        <h3 style="text-align: center;">
-            <a href="#sobre-mim">Sobre mim</a> | <a href="#academico">Acadêmico</a> | <a
-                href="experiencia.html">Experiência</a>
-        </h3>
-    </section>
-    <hr style="width: 75%">  -->
     <!-- Sobre mim -->
     <section id="sobre-mim">
         <?php
@@ -76,7 +68,7 @@
         <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Editar</button>
         <!-- Modal Sobre mim -->
         <div id="id01" class="modal">
-            <form class="modal-content animate" style="width: 35%;" action="./editar_sobre.php" method="get">
+            <form class="modal-content animate" style="width: 35%;" action="./funcoes/editar_sobre.php" method="get">
                 <center>
                     <h2>Editar Informações: Sobre mim</h2>
                 </center>
@@ -167,7 +159,7 @@
         <button onclick="document.getElementById('id02').style.display='block'" style="width:auto;">Editar</button>
         <!-- Modal Acadêmico -->
         <div id="id02" class="modal">
-            <form class="modal-content animate" style="width: 35%;" action="./editar_academico.php" method="get">
+            <form class="modal-content animate" style="width: 35%;" action="./funcoes/editar_academico.php" method="get">
                 <center>
                     <h2>Editar Informações: Acadêmico</h2>
                 </center>
@@ -265,7 +257,7 @@
         <!-- Modal Experiência -->
         <div id="id03" class="modal">
         
-            <form class="modal-content animate" style="width: 35%;" action="./editar_experiencia.php" method="get">
+            <form class="modal-content animate" style="width: 35%;" action="./funcoes/editar_experiencia.php" method="get">
                 <center>
                     <h2>Editar Informações: Experiência</h2>
                 </center>

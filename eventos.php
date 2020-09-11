@@ -1,5 +1,5 @@
 <?php
-    include("./valida_pagina.php");
+    include("./funcoes/valida_pagina.php");
     validaHome();
 ?>
 
@@ -18,7 +18,7 @@
         <h3>EVENTOS</h3>
     </div>
     <?php
-        include("./barra_esquerda.php");
+        include("./estrutura/barra_esquerda.php");
     ?>
 
 </aside>

@@ -15,9 +15,9 @@
     unset($conn);
 
     if( $rows == 1 ){
-        header("Location: ./feed.php");
+        header("Location: ../feed.php");
     }else{
-        header("Location: ./feed.php");
+        header("Location: ../feed.php");
     }
 
 ?>

@@ -24,5 +24,5 @@
         <br>
         <hr>
         <br>
-        <a href="deslogar.php" class="botao">LOGOUT</a>
+        <a href="./funcoes/deslogar.php" class="botao">LOGOUT</a>
     </div>

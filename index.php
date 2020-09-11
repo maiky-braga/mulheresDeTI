@@ -1,5 +1,5 @@
 <?php
-    include("./valida_pagina.php");
+    include("./funcoes/valida_pagina.php");
     validaLogado();
 ?>
 

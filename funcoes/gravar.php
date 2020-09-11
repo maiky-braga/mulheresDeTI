@@ -23,9 +23,9 @@
         $_SESSION["id_login"]  = $id;
         $_SESSION["nome"]      = $nome;
         unset($conn);
-        header("Location: ./feed.php");
+        header("Location: ../feed.php");
     }else{
-        header("Location: ./cadastro.html");
+        header("Location: ../cadastro.html");
     }
 
 ?>

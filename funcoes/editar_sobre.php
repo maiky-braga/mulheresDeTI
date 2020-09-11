@@ -12,11 +12,13 @@
     $pcd     = pg_escape_string( trim($_REQUEST['pcd']) );
 
     $rows = updateSobrePessoa($conn, $_SESSION["id_login"], $cpf, $cidade, $uf, $pcd);
+
     unset($conn);
+
     if( $rows == 1 ){
-        header("Location: ./perfil.php");
+        header("Location: ../perfil.php");
     }else{
-        header("Location: ./perfil.php");
+        header("Location: ../perfil.php");
     }
 
 ?>
