@@ -1,7 +1,7 @@
-body {font-family: Arial, Helvetica, sans-serif;}
+body {font-family: calibri;}
 
 /* Full-width input fields */
-input[type=text], input[type=password] {
+input[type=text], select, input[type=date], input[type=textarea] {
   width: 50%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -21,7 +21,7 @@ input[type=text], input[type=password] {
 
 /* Set a style for all buttons */
 button {
-  background-color: #4CAF50;
+  background-color: #FFCC66;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
@@ -126,10 +126,10 @@ span.psw {
   .cancelbtn {
      width: 100%;
   }
-}body {font-family: Arial, Helvetica, sans-serif;}
+}body {font-family: Calibri}
 
 /* Full-width input fields */
-input[type=text], input[type=password] {
+input[type=text], select, input[type=date], input[type=textarea] {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -140,7 +140,7 @@ input[type=text], input[type=password] {
 
 /* Set a style for all buttons */
 button {
-  background-color: #4CAF50;
+  background-color: #FFCC66;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;

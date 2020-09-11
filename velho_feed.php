@@ -1,12 +1,17 @@
+<?php
+    session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/base.css">
     <title>FEED</title>
 </head>
 
 <body>
+
 
 <header class="o-header">
     <center>
@@ -17,13 +22,19 @@
 
 <aside class="o-aside">
     <div class="navbar">
-        <h2> oi, @user</h2>
+        <h2> oi,
+            <?php
+                if( isset($_SESSION["login"]) && $_SESSION["login"] ){
+                    echo($_SESSION["nome"]);
+                }
+            ?>
+        </h2>
         <figure>
             <image src="./imagens/icon.png" alt="TechLadiesRepository"/>
         </figure>
         <hr>
         <br>
-        <a href="perfil.html">PERFIL</a>
+        <a href="perfil.php">PERFIL</a>
         <br>
         <br>
         <a href="vagas.html">VAGAS</a>

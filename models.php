@@ -1,5 +1,12 @@
 <?php
-    
+
+    function verificaUsuario( $conn, $email, $senha ){
+        $sql = "select email, senha from pessoa where email = '$email' and senha='$senha';";
+        $result = pg_query( $conn, $sql );
+        $rows   = pg_affected_rows($result);
+        return $rows;
+    }
+
     function pegaIdEmail( $conn, $email ){
         $sql = "select id_pessoa from pessoa where email = '$email';";
         $result = pg_query( $conn, $sql );
@@ -9,7 +16,16 @@
         }
     }
 
-    /** CADASTRO PERFIL**/
+    function pegaNome( $conn, $email ){
+        $sql = "select nome from pessoa where email = '$email';";
+        $result = pg_query( $conn, $sql );
+        if( $result ){
+            $rs = pg_fetch_assoc($result);
+            return $rs['nome'];
+        }
+    }
+
+    /** CREATE **/
     function cadastroUsuario($conn, $nome, $email, $senha, $sobrenome, $data){
         $sql = "insert into pessoa( email, nome, sobrenome, senha, data_nascimento ) values ( '$email', '$nome', '$sobrenome', md5('$senha'), '$data' );";
         $result = pg_query( $conn, $sql );
@@ -24,15 +40,22 @@
         return $rows;
     }
 
-    function cadastroAcademicoUsuario( $conn, $id, $formacao, $grau, $status, $curso, $instituicao, $ead, $inicio, $fim ){
-        $sql = "insert into academico( fk_id_pessoa, formacao, grau, status, curso, instituica, ead, inicio, fim ) values ( '$id', '$formacao', '$grau', '$status', '$curso', '$instituicao', $ead, '$inicio', '$fim');";
+    function cadastroAcademicoUsuario( $conn, $id, $formacao, $grau, $status, $curso, $instituicao, $ead){
+        $sql = "insert into academico( fk_id_pessoa, formacao, grau, status, curso, instituicao, ead ) values ( '$id', '$formacao', '$grau', '$status', '$curso', '$instituicao', $ead);";
         $result = pg_query( $conn, $sql );
         $rows   = pg_affected_rows($result);
         return $rows;
     }
 
-    function cadastroExperienciaUsuario( $conn, $id, $empresa, $cargo, $descricao, $atual, $xp, $inicio_e, $fim_e ){
-        $sql = "insert into experiencia( fk_id_pessoa, empresa, cargo, descricao, atual, xp, inicio, fim ) values ( '$id', '$empresa', '$cargo', '$descricao', $atual, $xp, '$inicio_e', '$fim_e' );";
+    function cadastroExperienciaUsuario( $conn, $id, $empresa, $cargo, $descricao, $atual){
+        $sql = "insert into experiencia( fk_id_pessoa, empresa, cargo, descricao, atual) values ( '$id', '$empresa', '$cargo', '$descricao', $atual);";
+        $result = pg_query( $conn, $sql );
+        $rows   = pg_affected_rows($result);
+        return $rows;
+    }
+
+    function cadastroPostUsuario( $conn, $id, $descricao){
+        $sql = "insert into post(fk_id_pessoa, descricao) values ( '$id', '$descricao');";
         $result = pg_query( $conn, $sql );
         $rows   = pg_affected_rows($result);
         return $rows;
@@ -62,6 +85,15 @@
         $result = pg_query( $conn, $sql );
         if( $result ){
             $rs = pg_fetch_assoc($result);
+            return $rs;
+        }
+    }
+
+    function pegaPosts( $conn ){
+        $sql = "select concat(nome,' ',sobrenome) as nome, descricao as desc, TO_CHAR(data, 'DD/MM/YYYY HH24:MI') as data from post inner join pessoa as p on post.fk_id_pessoa = p.id_pessoa order by data desc";
+        $result = pg_query( $conn, $sql );
+        if( $result ){
+            $rs = pg_fetch_all($result);
             return $rs;
         }
     }
@@ -109,6 +141,5 @@
         $rows   = pg_affected_rows($result);
         return $rows;
     }
-
 
 ?>

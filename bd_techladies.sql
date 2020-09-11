@@ -54,4 +54,12 @@ create table experiencia(
 	primary key (id_experiencia_pessoa, fk_id_pessoa)
 )
 
+create table post(
+    id_post serial,
+    fk_id_pessoa int,
+    descricao    varchar(255),
+    data_cadastro timestamp default current_timestamp,
+	tipo int,
+    primary key(id_post, fk_id_pessoa)
+);
 

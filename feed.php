@@ -1,65 +1,72 @@
 <?php
-    session_start();
+    
+    include("./models.php");
+    include("./conexao.php");
+    include("./valida_pagina.php");
+    validaHome();
 ?>
 
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="css/style.css">
-    <title>FEED</title>
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="./css/modalBase.css">
+    <title>Tech Ladies: Feed</title>
 </head>
 
-<body>
-
-
-<header class="o-header">
-    <center>
-        <h3>TECH LADIES - Feed</h3>
-    </center>
-
-</header>
-
+<body class="login">
+<header class="o-header"></header>
 <aside class="o-aside">
-    <div class="navbar">
-        <h2> oi,
-            <?php
-                if( isset($_SESSION["login"]) && $_SESSION["login"] ){
-                    echo($_SESSION["nome"]);
-                }
-            ?>
-        </h2>
-        <figure>
-            <image src="./imagens/icon.png" alt="TechLadiesRepository"/>
-        </figure>
-        <hr>
-        <br>
-        <a href="perfil.php">PERFIL</a>
-        <br>
-        <br>
-        <a href="vagas.html">VAGAS</a>
-        <br>
-        <br>
-        <a href="eventos.html">EVENTOS</a>
-        <br>
-        <br>
-        <a href="forum.html">FÓRUM</a>
-        <br>
-        <hr>
-        <br>
-        <a href="login.html">LOGOUT</a>
+    <div class="apresentacao">
+        <h3>FEED</h3>
     </div>
+    <?php
+        include("./barra_esquerda.php");
+    ?>
 
 </aside>
 
 <main class="o-main">
+    <section id="post">
+        <form action="./postar.php" method="GET">
+            <div class="container">
+                <label for="descricao"></label>
+                <input type="text" placeholder="O que você tem a compartilhar?" name="descricao" style="height:150px; border-radius:4px; background: #f5f4f2;">
+                <button type="submit" style="width:auto; border-radius: 6px;">Postar</button>
+            </div>
+        </form>
+        <hr>
+    </div>
+    </form> 
+    </section>
+    
+    <section id="postagens">
+        <?php
+        $conn = conexaoPg();
+        $posts = pegaPosts($conn);
+        if( $posts ){
+            foreach( $posts as $value ){
+                $nome = $value['nome'];
+                $desc = $value['desc'];
+                $data = $value['data'];
+                echo("<div style='background: #f5f4f2; border-radius: 4px; border: 1px solid #333; padding: 10px;'> <b>$nome | $data </b> <br><br> $desc </div>");
+                echo("<br>");
+            }
+        }
+        
+        unset($conn);
+        ?>
+    </section>
 </main>
+</body>
+
 <footer class="o-footer">
     <center>
-        <a href="https://github.com/adudars/mulheresDeTI">
+        <a href="https://github.com/ykiam-dyolf/mulheresDeTI" target="_blank">
             <image src="./imagens/GitHub.png" alt="TechLadiesRepository"/>
         </a>
     </center>
 </footer>
-</body>
+
 </html>

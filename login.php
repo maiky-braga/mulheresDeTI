@@ -1,20 +1,28 @@
 <?php
-    session_start(); 
-    if(isset($_GET['logout'])){
-       session_destroy();
-       echo "Voce foi deslogado";
-    }else if(isset($_SESSION["LOGIN"])){
-      echo "Voce esta logado";
-      
-    }
-    else if(isset($_POST['user']) && $_POST['user'] == "admin" 
-    && isset($_POST['pass']) && $_POST['pass'] == "admin"){
-       $_SESSION["LOGIN"] = true; 
-       $_SESSION["USER_NAME"] = $_POST['user'] ;
-       echo "login ok";
-       //header("Location: bemvindo.html");
+    include("./models.php");
+    include("./conexao.php");
+    
+    $conn = conexaoPg();
+
+    $email     = pg_escape_string( trim($_REQUEST['email'])     );
+    $senha     = pg_escape_string( trim($_REQUEST['senha'])     );
+    $senha = md5($senha);
+    
+    $rows = verificaUsuario($conn, $email, $senha);
+
+    if($rows == 1){
+        session_start();
+        $id = pegaIdEmail( $conn, $email );
+        $nome = pegaNome( $conn, $email );
+        $sobre_mim = pegaSobrePessoa( $conn, $id );
+        $academico = pegaAcademicoPessoa( $conn, $id );
+        $experiencia = pegaExperienciaPessoa( $conn, $id );
+        $_SESSION["login"]     = true;
+        $_SESSION["id_login"]  = $id;
+        $_SESSION["nome"]      = $nome;
+        unset($conn);
+        header("Location: ./feed.php");
     }else{
-         header('HTTP/1.0 403 Forbidden');
-         die('Voce nao esta logado' . $_SESSION["LOGIN"]);  
+        header("Location: ./login.php");
     }
 ?>

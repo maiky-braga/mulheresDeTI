@@ -16,14 +16,16 @@
     if($rows == 1){
         session_start();
         $id = pegaIdEmail($conn, $email);
-        $sobre_mim = cadastroSobreUsuario($conn, $id, '', '', '', 0);
-        $academico = cadastroAcademicoUsuario($conn, $id, '', '', '', '', '', 0, '', '');
-        $experiencia = cadastroExperienciaUsuario($conn, $id, '', '', '', 0, 0, '', '');
+        $sobre_mim   = cadastroSobreUsuario($conn, $id, '', '', '', 0);
+        $academico   = cadastroAcademicoUsuario($conn, $id, '', '', '', '', '', 0);
+        $experiencia = cadastroExperienciaUsuario($conn, $id, '', '', '', 0);
         $_SESSION["login"]     = true;
         $_SESSION["id_login"]  = $id;
         $_SESSION["nome"]      = $nome;
         unset($conn);
         header("Location: ./feed.php");
+    }else{
+        header("Location: ./cadastro.html");
     }
 
 ?>

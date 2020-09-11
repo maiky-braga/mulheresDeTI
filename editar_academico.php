@@ -17,7 +17,7 @@
 
 
     $rows = updateAcademicoPessoa($conn, $_SESSION["id_login"], $formacao, $grau, $status, $curso, $instituicao, $ead, $inicio, $fim);
-
+    unset($conn);
     if( $rows == 1 ){
         header("Location: ./perfil.php");
     }else{
