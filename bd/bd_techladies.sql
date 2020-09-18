@@ -56,3 +56,20 @@ create table post(
     primary key(id_post, fk_id_pessoa)
 );
 
+create table perguntaForum(
+    id_pergunta serial,
+    titulo     varchar(255),
+    corpo      varchar(255),
+    tags      varchar(255),
+    primary key(id_pergunta)
+);
+
+create table respostaForum(
+	id_resposta serial,
+	fk_id_pergunta int,
+	resposta      varchar(255),
+	primary key(id_resposta),
+	FOREIGN KEY(fk_id_pergunta) 
+   	REFERENCES perguntaForum(id_pergunta)
+);
+

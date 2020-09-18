@@ -142,4 +142,48 @@
         return $rows;
     }
 
+
+    // function createPerguntaForum( $conn){
+    //     $sql = "create table perguntaForum(
+    //         id_pergunta serial,
+    //         titulo     varchar(255),
+    //         corpo      varchar(255),
+    //         tags      varchar(255),
+    //         primary key(id_pergunta)
+    //     );";
+    //     $result = pg_query( $conn, $sql );
+    //     $rows   = pg_affected_rows($result);
+    //     return $rows;
+    // }
+
+    // function createRespostaForum( $conn){
+    //     $sql = "create table respostaForum(
+    //         id_resposta serial,
+    //         fk_id_pergunta int,
+    //         resposta      varchar(255),
+    //         primary key(id_resposta),
+    //         FOREIGN KEY(fk_id_pergunta) 
+    //            REFERENCES perguntaForum(id_pergunta)
+    //     );";
+    //     $result = pg_query( $conn, $sql );
+    //     $rows   = pg_affected_rows($result);
+    //     return $rows;
+    // }
+
+    function criarPergunta($conn, $titulo, $corpo, $tags){
+        $sql = "insert into perguntaForum(titulo, corpo, tags) values ( '$titulo', '$corpo', '$tags');";
+        $result = pg_query( $conn, $sql );
+        $rows   = pg_affected_rows($result);
+        return $rows;
+    }
+
+    function pegaPerguntas( $conn ){
+        $sql = "select id_pergunta as id, titulo, corpo, tags from perguntaForum";
+        $result = pg_query( $conn, $sql );
+        if( $result ){
+            $rs = pg_fetch_all($result);
+            return $rs;
+        }
+    }
+
 ?>
