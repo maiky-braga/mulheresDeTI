@@ -113,8 +113,8 @@
                                     </div>
                                     </div>
                                     <div class='modal-footer'>
-                                        <button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button>
-                                        <button type='button' class='btn btn-primary'>Save changes</button>
+                                        <button type='button' class='btn btn-secondary' data-dismiss='modal'>Fechar sem enviar</button>
+                                        <button type='button' class='btn btn-primary'>Enviar resposta</button>
                                     </div>
                                     </div>
                                 </div>
