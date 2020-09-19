@@ -1,4 +1,6 @@
 <?php
+    include("./funcoes/models.php");
+    include("./funcoes/conexao.php");
     include("./funcoes/valida_pagina.php");
     validaHome();
 ?>
@@ -8,55 +10,61 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/base.css">
-    <title>Tech Ladies: Fórum</title>
+    <title>Tech Ladies: Oportunidades</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 </head>
 
 <body class="login">
-<header class="o-header">
-</header>
+<header class="o-header"></header>
 <aside class="o-aside">
     <div class="apresentacao">
-        <h3>VAGAS</h3>
+        <h3>OPORTUNIDADES</h3>
     </div>
-    <?php
-        include("./estrutura/barra_esquerda.php");
-    ?>
-    
+
 </aside>
 
-<main class="o-main">
-    <section id="post">
-    </section>
-    <section id="postagens">
+<aside class="o-aside">
+    <div class="centro">
+        <br><br><br><br><br><br><br><br>
+        <h1>TECH LADIES</h1>
+        <h5>Sua comunidade profissional</h5>
+        <div class="centralizado">
+            <form method="GET" action="./funcoes/postar.php">
+                <br>
+                <input type="button" class="botao" value="Minha conta">
+                <br><br>
+                <input type="button" class="botao" value="Fórum">
+                <br><br>
+                <input type="button" class="botao" value="Oportunidades">
+                <br><br>
+                <input type="button" class="botao" value="Eventos">
+                <br><br>
+            </form>
+         
+
+    </div>
+</aside>
+
+<main class="o-main" style="text-align: center;">
+    <div class="centro">
+        <br><br><br><br>
+        <h3 style="font-size: 43px;">Encontre sua vaga!</h3>
+        <p>É rápido e fácil.</p>
+        <hr>
+    </div>
+    <form method="POST" action="./funcoes/login.php">
         <br>
+        <input type="titulo" class="input_css" name="email" placeholder="Título da Vaga">
+        <br><br>
+        <input type="descricao" class="input_css" name="senha" placeholder="Descrição da vaga">
+
+        <input type="submit" class="botao" value="Adicionar vaga">
         <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-    </section>
+    </form>
+
+    <br>
+    <hr>
+    
 </main>
 </body>
 
