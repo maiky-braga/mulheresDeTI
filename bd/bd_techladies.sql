@@ -6,7 +6,8 @@ create table pessoa(
     senha     varchar(255),
     data_nascimento date,
     data_cadastro timestamp default current_timestamp,
-	foto_perfil bytea,
+	foto_pessoa varchar(255),
+	destino_foto_pessoa varchar(255),
     primary key(id_pessoa)
 );
 
