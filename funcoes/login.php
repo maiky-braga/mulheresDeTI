@@ -14,6 +14,7 @@
         session_start();
         $id = pegaIdEmail( $conn, $email );
         $nome = pegaNome( $conn, $email );
+        $infos = pegaInfosPessoa( $conn, $id );
         $sobre_mim = pegaSobrePessoa( $conn, $id );
         $academico = pegaAcademicoPessoa( $conn, $id );
         $experiencia = pegaExperienciaPessoa( $conn, $id );
@@ -23,6 +24,6 @@
         unset($conn);
         header("Location: ../feed.php");
     }else{
-        header("Location: ./login.html");
+        header("Location: ../login.html");
     }
 ?>

@@ -9,7 +9,8 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/modalBase.css">
     <title>Tech Ladies: Fórum</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 </head>
@@ -29,11 +30,11 @@
 <main class="o-main">
     <div class="container-fluid">
         <div class="jumbotron">
-            <h1 class="display-4">Forúm</h1>
+            <h1 class="display-4">Fórum</h1>
             <p class="lead">Retire aqui as suas dúvidas com a comunidade</p>
             <hr class="my-4">
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal">
+            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal" >
                 Faça uma pergunta
             </button>
 
@@ -92,7 +93,7 @@
                                 <p class='card-text'>$corpo</p>
                             </div>
                             <div class='card-footer text-muted'>
-                                <button type='button' class='btn btn-warning' data-toggle='modal' data-target='#exampleModal2'>
+                                <button type='button' class='btn btn-warning' data-toggle='modal' data-target='#exampleModal2' style='background-color: #FFCC66';>
                                 Responder
                                 </button>
                             </div>
@@ -114,7 +115,7 @@
                                     </div>
                                     <div class='modal-footer'>
                                         <button type='button' class='btn btn-secondary' data-dismiss='modal'>Fechar sem enviar</button>
-                                        <button type='button' class='btn btn-primary'>Enviar resposta</button>
+                                        <button type='button' class='btn btn-primary' style='background-color: #FFCC66;'>Enviar resposta</button>
                                     </div>
                                     </div>
                                 </div>

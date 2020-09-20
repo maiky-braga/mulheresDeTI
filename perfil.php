@@ -9,7 +9,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="./css/base.css">
     <link rel="stylesheet" href="./css/modalBase.css">
     <title>Tech Ladies: Perfil</title>
 </head>
@@ -29,6 +29,88 @@
 </aside>
 
 <main class="o-main">
+    <section id="mini-menu">
+        <?php
+            $conn = conexaoPg();
+            $infos = pegaInfosPessoa($conn, $_SESSION["id_login"]);
+            if( $infos ){
+                $nome = $infos['nome'];
+                $sobrenome = $infos['sobrenome'];
+                $email  = $infos['email'];
+                
+                echo( '<h2>Eu</h2>');
+                echo( "<p><b>Nome: </b><span>$nome</span></p>");
+                echo( "<p><b>Sobrenome: </b><span>$sobrenome</span></p>");
+                echo( " <p><b>E-mail: </b><span>$email</span></p>");
+            }
+            unset($conn);
+        ?>
+        <!-- Botão Modal Eu -->
+        <button onclick="document.getElementById('id00').style.display='block'" style="width:auto;">Editar</button>
+        <!-- Modal Eu -->
+        <div id="id00" class="modal">
+            <form class="modal-content animate" style="width: 35%;" action="./funcoes/editar_infos.php" method="get">
+                <center>
+                    <h2>Editar Informações: Eu</h2>
+                </center>
+                <div class="container">
+                    <label for="nome"><b>Nome</b></label>
+                    <input type="text" value="<?php echo($nome) ?>" name="nome" required>
+
+                    <label for="sobrenome"><b>Sobrenome</b></label>
+                    <input type="text" value="<?php echo($sobrenome) ?>" name="sobrenome" required>
+
+                    <label for="email"><b>E-mail</b></label>
+                    <input type="text" value="<?php echo($email) ?>" name="email" required>
+                   
+                    <button type="submit">Salvar</button>
+                </div>
+                <div class="container" style="background-color:#f1f1f1">
+                    <button type="button" onclick="document.getElementById('id00').style.display='none'" class="cancelbtn">Voltar</button>
+                </div>
+            </form>
+        </div>
+            
+        <!-- Botão Modal Eu - SENHA -->
+        <button onclick="document.getElementById('id04').style.display='block'" style="width:auto; background-color:#e79b02;">Mudar senha</button>
+        <!-- Modal Eu Senha -->
+        <div id="id04" class="modal">
+            <form name="form_senha" class="modal-content animate" style="width: 35%;" action="./funcoes/editar_senha.php" method="get">
+                <center>
+                    <h2>Editar Informações: Senha</h2>
+                </center>
+                <div class="container">
+                    <label for="senha"><b>Senha atual</b></label>
+                    <input type="password" name="senha" required>
+
+                    <label for="novasenha"><b>Nova senha</b></label>
+                    <input type="password" name="novasenha" required>
+
+                    <label for="novasenhaverifica"><b>Confirma senha</b></label>
+                    <input type="password" name="novasenhaverifica" required>
+
+                    <script language="javascript" type="text/javascript">
+                        function validar() {
+                            var novasenhaverifica = form_senha.novasenhaverifica.value;
+                            var novasenha = form_senha.novasenha.value;
+
+                            if (novasenha != novasenhaverifica){
+                                alert('Senhas não conferem!');
+                                form_senha.novasenhaverifica.focus();
+                            }
+                        }
+                    </script>
+
+                <button type="submit" onclick="return validar()">Salvar</button>
+                </div>
+                <div class="container" style="background-color:#f1f1f1">
+                    <button type="button" onclick="document.getElementById('id04').style.display='none'" class="cancelbtn">Voltar</button>
+                </div>
+            </form>
+        </div>
+    </section>
+    <hr style="width: 75%">
+
     <!-- Sobre mim -->
     <section id="sobre-mim">
         <?php

@@ -26,8 +26,8 @@
     }
 
     /** CREATE **/
-    function cadastroUsuario($conn, $nome, $email, $senha, $sobrenome, $data){
-        $sql = "insert into pessoa( email, nome, sobrenome, senha, data_nascimento ) values ( '$email', '$nome', '$sobrenome', md5('$senha'), '$data' );";
+    function cadastroUsuario($conn, $nome, $email, $senha, $sobrenome, $data ){
+        $sql = "insert into pessoa( email, nome, sobrenome, senha, data_nascimento, foto_perfil, destino ) values ( '$email', '$nome', '$sobrenome', md5('$senha'), '$data', 'icon.png','./imagens/icon.pg' );";
         $result = pg_query( $conn, $sql );
         $rows   = pg_affected_rows($result);
         return $rows;
@@ -62,6 +62,15 @@
     }
 
     /** GET DADOS PERFIL **/
+    function pegaInfosPessoa ( $conn, $id ){
+        $sql = "select nome, sobrenome, email, senha, foto_pessoa, destino_foto_pessoa from pessoa where id_pessoa = $id;";
+        $result = pg_query( $conn, $sql );
+        if( $result ){
+            $rs = pg_fetch_assoc($result);
+            return $rs;
+        }
+    }
+
     function pegaSobrePessoa( $conn, $id ){
         $sql = "select cpf, cidade, uf, pcd from sobre_pessoa where fk_id_pessoa = $id;";
         $result = pg_query( $conn, $sql );
@@ -99,6 +108,34 @@
     }
 
     /** UPDATE DADOS PERFIL **/
+    function updateFotoPessoa( $conn, $id, $foto, $destino){
+        $sql = "update pessoa set foto_pessoa='$foto', destino_foto_pessoa='$destino' where id_pessoa='$id';";
+        $result = pg_query( $conn, $sql );
+        $rows   = pg_affected_rows($result);
+        return $rows;
+    }
+
+    function updateInfosPessoa( $conn, $id, $nome, $sobrenome){
+        $sql = "update pessoa set nome='$nome', sobrenome='$sobrenome' where id_pessoa='$id';";
+        $result = pg_query( $conn, $sql );
+        $rows   = pg_affected_rows($result);
+        return $rows;
+    }
+
+    function updateInfosEmailPessoa ( $conn, $id, $email){
+        $sql = "update pessoa set email='$email' where id_pessoa = '$id' and '$email' not in (select email from pessoa);";
+        $result = pg_query( $conn, $sql );
+        $rows   = pg_affected_rows($result);
+        return $rows;
+    }
+
+    function updateSenhaPessoa ( $conn, $id, $senha, $novasenha){
+        $sql = "update pessoa set senha='$novasenha' where id_pessoa = '$id' and senha = '$senha';";
+        $result = pg_query( $conn, $sql );
+        $rows   = pg_affected_rows($result);
+        return $rows;
+    }
+
     function updateSobrePessoa( $conn, $id, $cpf, $cidade, $uf, $pcd ){
         $sql = "update sobre_pessoa set cidade='$cidade', uf='$uf', pcd='$pcd', cpf='$cpf' where fk_id_pessoa='$id';";
         $result = pg_query( $conn, $sql );

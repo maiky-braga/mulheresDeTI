@@ -1,7 +1,7 @@
 body {font-family: calibri;}
 
 /* Full-width input fields */
-input[type=text], select, input[type=date], input[type=textarea] {
+input[type=text], select, input[type=date], input[type=textarea], input[type=password], input[type=file] {
   width: 50%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -129,7 +129,7 @@ span.psw {
 }body {font-family: Calibri}
 
 /* Full-width input fields */
-input[type=text], select, input[type=date], input[type=textarea] {
+input[type=text], select, input[type=date], input[type=textarea], input[type=password], input[type=file] {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;

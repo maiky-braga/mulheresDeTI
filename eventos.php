@@ -1,4 +1,6 @@
 <?php
+    include("./funcoes/models.php");
+    include("./funcoes/conexao.php");
     include("./funcoes/valida_pagina.php");
     validaHome();
 ?>
@@ -7,7 +9,8 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/modalBase.css">
     <title>Tech Ladies: Eventos</title>
 </head>
 

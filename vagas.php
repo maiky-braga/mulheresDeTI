@@ -9,9 +9,10 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/modalBase.css">
     <title>Tech Ladies: Oportunidades</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous"> -->
 </head>
 
 <body class="login">
@@ -20,10 +21,12 @@
     <div class="apresentacao">
         <h3>OPORTUNIDADES</h3>
     </div>
-
+    <?php
+        include("./estrutura/barra_esquerda.php");
+    ?>
 </aside>
 
-<aside class="o-aside">
+<!-- <aside class="o-aside">
     <div class="centro">
         <br><br><br><br><br><br><br><br>
         <h1>TECH LADIES</h1>
@@ -43,7 +46,7 @@
          
 
     </div>
-</aside>
+</aside> -->
 
 <main class="o-main" style="text-align: center;">
     <div class="centro">
