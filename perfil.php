@@ -70,7 +70,7 @@
                 </div>
             </form>
         </div>
-            
+         
         <!-- Botão Modal Eu - SENHA -->
         <button onclick="document.getElementById('id04').style.display='block'" style="width:auto; background-color:#e79b02;">Mudar senha</button>
         <!-- Modal Eu Senha -->
@@ -89,17 +89,7 @@
                     <label for="novasenhaverifica"><b>Confirma senha</b></label>
                     <input type="password" name="novasenhaverifica" required>
 
-                    <script language="javascript" type="text/javascript">
-                        function validar() {
-                            var novasenhaverifica = form_senha.novasenhaverifica.value;
-                            var novasenha = form_senha.novasenha.value;
-
-                            if (novasenha != novasenhaverifica){
-                                alert('Senhas não conferem!');
-                                form_senha.novasenhaverifica.focus();
-                            }
-                        }
-                    </script>
+                    <script language="javascript" type="text/javascript" src="./js/validasenhanova.js"></script>
 
                 <button type="submit" onclick="return validar()">Salvar</button>
                 </div>
@@ -110,7 +100,17 @@
         </div>
     </section>
     <hr style="width: 75%">
-
+	<?php
+        if( isset($_SESSION["senha_ok"]) && $_SESSION["senha_ok"] == true ){
+            echo("<script language='javascript' type='text/javascript'>
+            alert('Nova senha salva com sucesso'); </script>");
+            $_SESSION["senha_ok"] = null;
+        }else if( isset($_SESSION["senha_ok"]) && $_SESSION["senha_ok"] == false ){
+            echo("<script language='javascript' type='text/javascript'>
+            alert('Senha atual não confere. Não foi salvo.'); </script>");
+            $_SESSION["senha_ok"] = null;
+        }
+    ?>
     <!-- Sobre mim -->
     <section id="sobre-mim">
         <?php
