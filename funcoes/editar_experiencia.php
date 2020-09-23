@@ -13,9 +13,9 @@
     $atual        = pg_escape_string( trim($_REQUEST['atual']) );
     $inicio_e     = pg_escape_string( trim($_REQUEST['inicio_e']) );
     $fim_e        = pg_escape_string( trim($_REQUEST['fim_e']) );
-
-
-    $rows = updateExperienciaPessoa($conn, $_SESSION["id_login"], $empresa, $cargo, $descricao, $atual, $inicio_e, $fim_e );
+    $id_xp        = pg_escape_string( trim($_REQUEST['id_xp']));
+    
+    $rows = updateExperienciaPessoa($conn, $id_xp, $empresa, $cargo, $descricao, $atual, $inicio_e, $fim_e );
     
     unset($conn);
 

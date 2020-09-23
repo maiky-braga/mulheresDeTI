@@ -17,13 +17,9 @@
 
     if( $rows == 1 ){
         $_SESSION["senha_ok"] = true;
-        // echo("<script language='javascript' type='text/javascript'>
-        //         window.alert('Nova senha salva com sucesso'); </script>");
         header("Location: ../perfil.php");
     }else{
         $_SESSION["senha_ok"] = false;
-        // echo("<script language='javascript' type='text/javascript'>
-        //         alert('Senha atual não confere. Não foi salvo.'); </script>");
         header("Location: ../perfil.php");
     }
 

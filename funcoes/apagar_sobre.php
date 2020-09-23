@@ -4,14 +4,22 @@
 
     include("./models.php");
     include("./conexao.php");
-    $conn = conexaoPg();
 
-    $rows = deleteSobrePessoa( $conn, $_SESSION["id_login"] );
+    $conn = conexaoPg();
+    
+    $id = $_SESSION["id_login"];
+
+    $rows = deleteSobrePessoa( $conn, $id );
 
     if( $rows == 1 ){
-        header("Location: ./perfil.php");
+        $rows2 = pegaSobrePessoa( $conn, $id );
+        if( $rows2 == 0){
+            $sobre_mim   = cadastroSobreUsuario($conn, $id, '', '', '', 0);
+        }
+        unset($conn);
+        header("Location: ../perfil.php");
     }else{
-        header("Location: ./perfil.php");
+        header("Location: ../perfil.php");
     }
 
 ?>

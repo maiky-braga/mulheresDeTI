@@ -4,14 +4,23 @@
 
     include("./models.php");
     include("./conexao.php");
+
     $conn = conexaoPg();
 
-    $rows = deleteAcademicoPessoa( $conn, $_SESSION["id_login"] );
+    $id_acad  = pg_escape_string( trim($_REQUEST['id_academico']));
+    $id = $_SESSION["id_login"];
+
+    $rows = deleteAcademicoPessoa( $conn, $id_acad );
 
     if( $rows == 1 ){
-        header("Location: ./perfil.php");
+        $rows2 = pegaAcademicoPessoa( $conn, $id );
+        if( $rows2 == 0){
+            $academico = cadastroAcademicoUsuario($conn, $id, '', '', '', '', '', 0);
+        }
+        unset($conn);
+        header("Location: ../perfil.php");
     }else{
-        header("Location: ./perfil.php");
+        header("Location: ../perfil.php");
     }
 
 ?>

@@ -14,9 +14,19 @@
     $rows2 = updateInfosEmailPessoa($conn, $_SESSION["id_login"], $email);
     unset($conn);
 
-    if( $rows == 1 or $rows2 == 1){
+    if( $rows == 1 or $rows2 == 1 ){
+        if( $rows2 == 1 ){
+            $_SESSION["email_ok"] = true;    
+        }else{
+            $_SESSION["email_ok"] = false;
+        }
         header("Location: ../perfil.php");
     }else{
+        if( $rows2 == 1 ){
+            $_SESSION["email_ok"] = true;    
+        }else{
+            $_SESSION["email_ok"] = false;
+        }
         header("Location: ../perfil.php");
     }
 

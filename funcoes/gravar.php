@@ -18,7 +18,7 @@
         $id = pegaIdEmail($conn, $email);
         $sobre_mim   = cadastroSobreUsuario($conn, $id, '', '', '', 0);
         $academico   = cadastroAcademicoUsuario($conn, $id, '', '', '', '', '', 0);
-        $experiencia = cadastroExperienciaUsuario($conn, $id, '', '', '', 0);
+        $experiencia = cadastroExperienciaUsuario($conn, $id, '', '', '', 0,0,0);
         $_SESSION["login"]     = true;
         $_SESSION["id_login"]  = $id;
         $_SESSION["nome"]      = $nome;

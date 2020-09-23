@@ -126,7 +126,9 @@ span.psw {
   .cancelbtn {
      width: 100%;
   }
-}body {font-family: Calibri}
+}
+
+body {font-family: Calibri}
 
 /* Full-width input fields */
 input[type=text], select, input[type=date], input[type=textarea], input[type=password], input[type=file] {

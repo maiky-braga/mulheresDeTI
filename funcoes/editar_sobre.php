@@ -4,6 +4,7 @@
 
     include("./models.php");
     include("./conexao.php");
+
     $conn = conexaoPg();
 
     $cpf     = pg_escape_string( trim($_REQUEST['cpf']) );
