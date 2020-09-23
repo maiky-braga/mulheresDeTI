@@ -10,7 +10,7 @@
     
     $infos = pegaInfosPessoa($conn, $id_user);
     $sobre = pegaSobrePessoa($conn, $id_user);
-    $value = pegaAcademicoPessoa($conn, $id_user);
+    $academico = pegaAcademicoPessoa($conn, $id_user);
     $experiencia = pegaExperienciaPessoa($conn, $id_user);
 ?>
 
@@ -66,8 +66,8 @@
     <section id='academico'>
         <?php
         echo( '<h2>Acadêmico</h2>');
-        if ( $value ){
-            // foreach( $academico as $value ){
+        if ( $academico ){
+            foreach( $academico as $value ){
                 $formacao = $value['formacao'];
                 $grau = $value['grau'];
                 $status = $value['status'];
@@ -91,7 +91,7 @@
                 echo( "<p><b>EAD: </b><span>$ead</span></p>");
                 echo( " <p><b>Início: </b><span>$academico_inicio</span></p>");
                 echo( " <p><b>Fim: </b><span>$academico_fim</span></p>");
-            // }     
+            }     
         } 
         ?>
     </section>
