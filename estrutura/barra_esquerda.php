@@ -12,7 +12,7 @@
     ?>
 
     <!-- Botão Modal Foto perfil -->
-    <button onclick="document.getElementById('id05').style.display='block'" style="width:auto; background: none; border-radius: 50%; border: none;"><image src="<?php echo($destino); ?>" style="width:120px; background: none; border-radius: 50%;"/></button>
+    <button onclick="document.getElementById('id05').style.display='block'" style="width:auto; background: none; border-radius: 50%; border: none;"><image src="<?php echo($destino); ?>" style="width:120px; height: 120px; background: none; border-radius: 50%;"/></button>
     
     <!-- Modal Eu Senha -->
     <div id="id05" class="modal">

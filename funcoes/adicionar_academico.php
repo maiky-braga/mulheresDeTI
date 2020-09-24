@@ -16,7 +16,7 @@
     $inicio        = pg_escape_string( trim($_REQUEST['inicio']) );
     $fim           = pg_escape_string( trim($_REQUEST['fim']) );
     
-    $rows = cadastroAcademicoUsuario($conn, $_SESSION["id_login"], $empresa, $cargo, $descricao, $atual, $inicio_e, $fim_e );
+    $rows = cadastroAcademicoUsuario( $conn, $_SESSION["id_login"], $formacao, $grau, $status, $curso, $instituicao, $ead, $inicio, $fim );
     
     unset($conn);
 

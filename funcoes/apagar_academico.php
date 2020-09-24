@@ -15,7 +15,7 @@
     if( $rows == 1 ){
         $rows2 = pegaAcademicoPessoa( $conn, $id );
         if( $rows2 == 0){
-            $academico = cadastroAcademicoUsuario($conn, $id, '', '', '', '', '', 0);
+            $academico = cadastroAcademicoUsuario($conn, $id, '', '', '', '', '', 0,0,0);
         }
         unset($conn);
         header("Location: ../perfil.php");

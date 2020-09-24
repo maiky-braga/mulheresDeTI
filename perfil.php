@@ -28,21 +28,37 @@
 
 </aside>
 
+
 <main class="o-main">
     <section id="mini-menu">
         <?php
             $conn = conexaoPg();
             $infos = pegaInfosPessoa($conn, $_SESSION["id_login"]);
+            $emails = pegaEmails( $conn );
             
             if( $infos ){
                 $nome = $infos['nome'];
                 $sobrenome = $infos['sobrenome'];
                 $email  = $infos['email'];
+                $email_ref  = $infos['email'];
+                $old_pass = $infos['senha'];
                 
                 echo( '<h2>Eu</h2>');
                 echo( "<p><b>Nome: </b><span>$nome</span></p>");
                 echo( "<p><b>Sobrenome: </b><span>$sobrenome</span></p>");
                 echo( " <p><b>E-mail: </b><span>$email</span></p>");
+            }
+
+            if( $emails ){
+                $lista_emails = "";
+                foreach($emails as $e){
+                    $es = $e['email'];
+                    if($lista_emails == ""){
+                        $lista_emails = $es . "|";
+                    }else{
+                        $lista_emails = $lista_emails . $es . "|";
+                    }
+                }
             }
             unset($conn);
         ?>
@@ -51,40 +67,30 @@
         <button onclick="document.getElementById('id_info_edit').style.display='block'" style="width:auto; background-color: #9ea956;">Editar</button>
         <!-- Modal Eu -->
         <div id="id_info_edit" class="modal">
-            <form class="modal-content animate" style="width: 35%;" action="./funcoes/editar_infos.php" method="get">
+            <form name='form_info' class="modal-content animate" style="width: 35%;" action="./funcoes/editar_infos.php" method="get">
                 <center>
                     <h2>Editar Informações: Eu</h2>
                 </center>
                 <div class="container">
                     <label for="nome"><b>Nome</b></label><br>
-                    <input type="text" value="<?php echo($nome) ?>" name="nome" required>
+                    <input type="text" value="<?php echo($nome); ?>" name="nome" required>
                     <br>
                     <label for="sobrenome"><b>Sobrenome</b></label><br>
-                    <input type="text" value="<?php echo($sobrenome) ?>" name="sobrenome" required>
+                    <input type="text" value="<?php echo($sobrenome); ?>" name="sobrenome" required>
                     <br>
                     <label for="email"><b>E-mail</b></label><br>
-                    <input type="text" value="<?php echo($email) ?>" name="email" required>
-                    <br>
-                    <button type="submit">Salvar</button>
+                    <input type="text" value="<?php echo($email); ?>" name="email" required>
+                     <br>                 
+                    <input type="hidden" value="<?php echo($lista_emails); ?>" name="lista_emails">
+                    <input type="hidden" value="<?php echo($email_ref); ?>" name="email_ref">
+                    <button type="submit"  style="background-color:#e79b02;" onclick="return validar_email()">Salvar</button>
                 </div>
                 <div class="container" style="background-color:#f1f1f1">
                     <button type="button" onclick="document.getElementById('id_info_edit').style.display='none'" class="cancelbtn">Voltar</button>
                 </div>
             </form>
         </div>
-         
-        <?php
-            if( isset($_SESSION["email_ok"]) && $_SESSION["email_ok"] == true ){
-                echo("<script language='javascript' type='text/javascript'>
-                alert('Novo e-mail salvo com sucesso'); </script>");
-                $_SESSION["email_ok"] = null;
-            }else if( isset($_SESSION["email_ok"]) && $_SESSION["email_ok"] == false ){
-                echo("<script language='javascript' type='text/javascript'>
-                alert('Novo e-mail não foi salvo, pois e-mail requerido já existe.'); </script>");
-                $_SESSION["email_ok"] = null;
-            }
-        ?>
-
+        
         <!-- Botão Modal Eu - SENHA -->
         <button onclick="document.getElementById('id_pass_edit').style.display='block'" style="width:auto;  background-color:#be2914;">Mudar senha</button>
         <!-- Modal Eu Senha -->
@@ -94,16 +100,20 @@
                     <h2>Editar Informações: Senha</h2>
                 </center>
                 <div class="container">
-                    <label for="senha"><b>Senha atual</b></label><br>
+                    <label for="senha"><b>Senha atual</b></label>
+                    <br>
                     <input type="password" name="senha" required>
                     <br>
-                    <label for="novasenha"><b>Nova senha</b></label><br>
-                    <input type="password" name="novasenha" required><br>
-
-                    <label for="novasenhaverifica"><b>Confirma senha</b></label><br>
-                    <input type="password" name="novasenhaverifica" required><br>
-
-                    <button type="submit" onclick="return validar()">Salvar</button>
+                    <label for="novasenha"><b>Nova senha</b></label>
+                    <br>
+                    <input type="password" name="novasenha" required>
+                    <br>
+                    <label for="novasenhaverifica"><b>Confirma senha</b></label>
+                    <br>
+                    <input type="password" name="novasenhaverifica" required>
+                    <input type="hidden" value="<?php echo($old_pass); ?>" name="old_pass">
+                    <br>
+                    <button type="submit"  style="background-color:#e79b02;" onclick="return validar()">Salvar</button>
                 </div>
                 <div class="container" style="background-color:#f1f1f1">
                     <button type="button" onclick="document.getElementById('id_pass_edit').style.display='none'" class="cancelbtn">Voltar</button>
@@ -188,14 +198,14 @@
                         <?php
                             if( $resultado['pcd'] == 1 ){
                                 echo ('<option selected value="1">SIM</option>');
-                                echo ('<option value="2">NÃO</option>');
+                                echo ('<option value="0">NÃO</option>');
                             }else{
                                 echo ('<option value="1">SIM</option>');
-                                echo ('<option selected value="2">NÃO</option>');
+                                echo ('<option selected value="0">NÃO</option>');
                             }
                         ?>
                     </select>
-                    <button type="submit">Salvar</button>
+                    <button type="submit"  style="background-color:#e79b02;">Salvar</button>
                 </div>
                 <div class="container" style="background-color:#f1f1f1">
                     <button type="button" onclick="document.getElementById('id_sobre_edit').style.display='none'" class="cancelbtn">Voltar</button>
@@ -226,14 +236,14 @@
                         <?php
                             if( $resultado['pcd'] == 1 ){
                                 echo ('<option selected value="1">SIM</option>');
-                                echo ('<option value="2">NÃO</option>');
+                                echo ('<option value="0">NÃO</option>');
                             }else{
                                 echo ('<option value="1">SIM</option>');
-                                echo ('<option selected value="2">NÃO</option>');
+                                echo ('<option selected value="0">NÃO</option>');
                             }
                         ?>
                     </select>
-                    <button type="submit">Tem certeza que deseja deletar?lvar</button>
+                    <button type="submit" style="background-color:#e79b02;">Desejo mesmo deletar!</button>
                 </div>
                 <div class="container" style="background-color:#f1f1f1">
                     <button type="button" onclick="document.getElementById('id_sobre_del').style.display='none'" class="cancelbtn">Voltar</button>
@@ -276,10 +286,10 @@
                         <?php
                             if( $academico['ead'] == 1 ){
                                 echo ('<option selected value="1">SIM</option>');
-                                echo ('<option value="2">NÃO</option>');
+                                echo ('<option value="0">NÃO</option>');
                             }else{
                                 echo ('<option value="1">SIM</option>');
-                                echo ('<option selected value="2">NÃO</option>');
+                                echo ('<option selected value="0">NÃO</option>');
                             }
                         ?>
                     </select><br>
@@ -290,7 +300,7 @@
                     <label for="fim"><b>Fim</b></label><br>
                     <input type="date" placeholder="Ex: 31/12/2021" name="fim" required>
                 
-                    <button type="submit">Salvar</button>
+                    <button type="submit"  style="background-color:#e79b02;">Salvar</button>
                 </div>
                 <div class="container" style="background-color:#f1f1f1">
                     <button type="button" onclick="document.getElementById('id_acad_add').style.display='none'" class="cancelbtn">Voltar</button>
@@ -357,7 +367,7 @@
                     echo( "<label for='inicio'><b>Início</b></label><br><input type='date' placeholder='Ex: 01/08/2016' value='$inicio' name='inicio' required><br>" );
                     echo( "<label for='fim'><b>Fim</b></label><br><input type='date' placeholder='Ex: 31/12/2021' value='$fim' name='fim' required>" );
                     echo( "<input type='hidden' name='id_academico' value='$id_academico'>" );
-                    echo( "<button type='submit'>Salvar</button></div>" );
+                    echo( "<button type='submit' style='background-color:#e79b02;'>Salvar</button></div>" );
                     echo( "<div class='container' style='background-color:#f1f1f1'><button type='button' onclick=document.getElementById('id_acad_edit$count').style.display='none' class='cancelbtn'>Voltar</button></div>" );
                     echo( "</form></div>" );
 
@@ -366,7 +376,7 @@
                     echo("<!-- Botão: Modal Acadêmico --> <button onclick=document.getElementById('id_acad_del$count').style.display='block' style='width:auto; background-color:#be2914'>Deletar</button>");
                     echo( "<div id='id_acad_del$count' class='modal'>" );
                     echo( "<form name='form_acad_del' class='modal-content animate' style='width: 35%;' action='./funcoes/apagar_academico.php' method='get'>" );
-                    echo( "<center><h2>Editar Informações: Acadêmico</h2></center>" );
+                    echo( "<center><h2>Deletar Informações: Acadêmico</h2></center>" );
                     echo( "<div class='container'>" );
                     echo( "<label for='formacao'><b>Formação</b></label><br><input type='text' value='$formacao' disabled><br>" );
                     echo( "<label for='grau'><b>Grau</b></label><br><input type='text' value='$grau' disabled><br>" );
@@ -387,7 +397,7 @@
                     echo( "<label for='inicio'><b>Início</b></label><br><input type='date' value='$inicio' disabled><br>" );
                     echo( "<label for='fim'><b>Fim</b></label><br><input type='date' value='$fim' disabled>" );
                     echo( "<input type='hidden' name='id_academico' value='$id_academico'>" );
-                    echo( "<button type='submit'>Salvar</button></div>" );
+                    echo( "<button type='submit' style='background-color:#e79b02;'>Desejo mesmo deletar!</button></div>" );
                     echo( "<div class='container' style='background-color:#f1f1f1'><button type='button' onclick=document.getElementById('id_acad_del$count').style.display='none' class='cancelbtn'>Voltar</button></div>" );
                     echo( "</form></div>" );
 
@@ -421,52 +431,6 @@
     
     <!-- EXPERIÊNCIA -->
     <section id="experiencia">
-        <!-- Botão Experiencia - ADD -->
-        <button onclick="document.getElementById('id_xp_add00').style.display='block'" style="width:auto; background-color:#e79b02;" class="centro">Adicionar nova experiência</button>
-        <br>
-        <!-- Modal Experiência - ADD-->
-        <div id="id_xp_add00" class="modal">
-            <form name="form_xp" class="modal-content animate" style="width: 35%;" action="./funcoes/adicionar_experiencia.php" method="get">
-                <center>
-                    <h2>Adicionar Informações: Experiência</h2>
-                </center>
-                <div class="container">
-                    <label for="empresa"><b>Empresa</b></label><br>
-                    <input type="text" placeholder="Ex: ArcelorMittal" name="empresa" required><br>
-
-                    <label for="cargo"><b>Cargo</b></label><br>
-                    <input type="text" placeholder="Ex: Estágio de Analista Funcional" name="cargo" required><br>
-
-                    <label for="descricao"><b>Descrição</b></label><br>
-                    <input type="text" placeholder="Ex: Atendimento de incidentes SAP SD e Debug ABAP (Máx: 255)" name="descricao" required><br>
-
-                    <label for="inicio_e"><b>Início</b></label><br>
-                    <input type="date" placeholder="Ex: 01/01/2020" name="inicio_e" required><br>
-
-                    <label for="fim_e"><b>Fim</b></label><br>
-                    <input type="date" placeholder="Ex: 31/12/2020" name="fim_e" id="fim_e" required><br>
-
-                    <label for="atual"><b>Atual</b></label><br>
-                    <select class="atual" id="atual" name="atual" onchange="atual();">
-                        <?php
-                            if( $resultado['atual'] == 1 ){
-                                echo ('<option selected value="1">SIM</option>');
-                                echo ('<option value="2">NÃO</option>');
-                            }else{
-                                echo ('<option value="1">SIM</option>');
-                                echo ('<option selected value="2">NÃO</option>');
-                            }
-                        ?>
-                    </select>
-                    
-                    <button type="submit">Salvar</button>
-                </div>
-                <div class="container" style="background-color:#f1f1f1">
-                    <button type="button" onclick="document.getElementById('id_xp_add00').style.display='none'" class="cancelbtn">Voltar</button>
-                </div>
-            </form>
-        </div>
-                           
         <?php
             $conn = conexaoPg();
             $experiencia = pegaExperienciaPessoa($conn, $_SESSION["id_login"]);
@@ -482,11 +446,56 @@
                     $fim_e  = $value['fim'];
                     $id_xp = $value['id_experiencia_pessoa'];
                     
-                    if($value['atual'] == 1){
+                    if( $value['atual'] == 1 ){
                         $atual = "SIM";
                     }else{
                         $atual = "NÃO";
                     }
+
+
+                    if($count == 0){
+                       
+                        echo( "<!-- Botão Experiencia - ADD -->" );
+                        echo( "<button onclick=document.getElementById('id_xp_add').style.display='block' style='width:auto; background-color:#e79b02;' class='centro'>Adicionar nova experiência</button>" );
+                        echo( "<br>" );
+                        echo( "<!-- Modal Experiência - ADD-->" );
+                        echo( "<div id='id_xp_add' class='modal'>" );
+                        echo( "<form name='form_xp_add' class='modal-content animate' style='width: 35%;' action='./funcoes/adicionar_experiencia.php' method='get'>" );
+                        echo( "<center><h2>Adicionar Informações: Experiência</h2></center>" );
+                        echo( "<div class='container'>" );
+                        echo( "<label for='empresa'><b>Empresa</b></label><br>" );
+                        echo( "<input type='text' placeholder='Ex: ArcelorMittal' name='empresa' required><br>" );
+
+                        echo( "<label for='cargo'><b>Cargo</b></label><br>" );
+                        echo( "<input type='text' placeholder='Ex: Estágio de Analista Funcional' name='cargo' required><br>" );
+
+                        echo( "<label for='descricao'><b>Descrição</b></label><br>" );
+                        echo( "<input type='text' placeholder='Ex: Atendimento de incidentes SAP SD e Debug ABAP (Máx: 255)' name='descricao' required><br>" );
+
+                        echo( "<label for='inicio_e'><b>Início</b></label><br>" );
+                        echo( "<input type='date' placeholder='Ex: 01/01/2020' name='inicio_e' required><br>" );
+
+                        echo( "<label for='fim_e'><b>Fim</b></label><br>" );
+                        echo( "<input type='date' placeholder='Ex: 31/12/2020' name='fim_e' id='fim_e' required><br>" );
+
+                        echo( "<label for='atual'><b>Atual</b></label><br>" );
+                        echo( "<select class='atual' id='atual' name='atual' onchange='func_atual();'>" );
+
+                        if( $value['atual'] == 1 ){
+                            echo ('<option selected value="1">SIM</option>');
+                            echo ('<option value="0">NÃO</option>');
+                        }else{
+                            echo ('<option value="1">SIM</option>');
+                            echo ('<option selected value="0">NÃO</option>');
+                        }
+
+                        echo( "</select>" );
+                        echo( "<button type='submit' style='background-color:#e79b02;'>Salvar</button></div>" );
+                        echo( "<div class='container' style='background-color:#f1f1f1;'>" );
+                        echo( "<button type='button' onclick=document.getElementById('id_xp_add').style.display='none' class='cancelbtn'>Voltar</button>" );
+                        echo( "</div></form></div>" );
+                    }
+
 
                     echo( '<h2>Experiência</h2>' );
                     echo( "<p><b>Empresa: </b><span>$empresa</span></p>" );
@@ -500,16 +509,16 @@
                     //Botao e modal: EDITAR
                     echo( "<br> <!-- Botão Modal Experiência --> <button onclick=document.getElementById('id_xp_edit$count').style.display='block'  style='width:auto; background-color: #9ea956;'>Editar</button>" );                  
                     echo( "<div id='id_xp_edit$count' class='modal'>" );
-                    echo( "<form name='form_xp' class='modal-content animate' style='width: 35%;' action='./funcoes/editar_experiencia.php' method='get'>" );
+                    echo( "<form name='form_xp$count' id='form_xp_edit$count' class='modal-content animate' style='width: 35%;' action='./funcoes/editar_experiencia.php' method='get'>" );
                     echo( "<center><h2>Editar Informações: Experiência</h2></center>" );
                     echo( "<div class='container'>" );
                     echo( "<label for='empresa'><b>Empresa</b></label><br><input type='text' placeholder='Ex: ArcelorMittal' name='empresa' value='$empresa' required><br>" );
                     echo( "<label for='cargo'><b>Cargo</b></label><br><input type='text' placeholder='Ex: Estágio de Analista Funcional' value='$cargo' name='cargo' required><br>" );
                     echo( "<label for='descricao'><b>Descrição</b></label><br><input type='text' placeholder='Ex: Atendimento de incidentes SAP SD e Debug ABAP (Máx: 255)' value='$descricao' name='descricao' required><br>" );
                     echo( "<label for='inicio_e'><b>Início</b></label><br><input type='date' placeholder='Ex: 01/01/2019' value='$inicio_e' name='inicio_e' required><br>" );
-                    echo( "<label for='fim_e'><b>Fim</b></label><br><input type='date' placeholder='Ex: 31/08/2020' value='$fim_e' name='fim_e' id='fim_e' required><br>" );
+                    echo( "<label for='fim_e'><b>Fim</b></label><br><input type='date' placeholder='Ex: 31/08/2020' value='$fim_e' name='fim_e' id='fim_e$count' required><br>" );
                     echo( "<label for='atual'>" );
-                    echo( "<b>Atual</b></label><br><select class='atual' id='atual' name='atual' onchange=atual();>" );
+                    echo( "<b>Atual</b></label><br><select class='atual' id='atualedit$count' name='atual' onchange='func_atual_edit($count);'>" );
 
                     if( $value['atual'] == 1 ){
                         echo( "<option selected value='1'>SIM</option>" );
@@ -521,7 +530,8 @@
 
                     echo( "</select>" );
                     echo( "<input type='hidden' name='id_xp' value='$id_xp'>" );
-                    echo( "<button type='submit'>Salvar</button></div>" );
+                    echo( "<input type='hidden' name='count' value='$count' id='$count'>" );
+                    echo( "<button type='submit' style='background-color:#e79b02;'>Salvar</button></div>" );
                     echo( "<div class='container' style='background-color:#f1f1f1'><button type='button' onclick=document.getElementById('id_xp_edit$count').style.display='none' class='cancelbtn'>Voltar</button></div>" );
                     echo( "</form></div>" );
 
@@ -550,7 +560,7 @@
 
                     echo( "</select>");
                     echo( "<input type='hidden' name='id_xp' value='$id_xp'>" );
-                    echo( "<button type='submit'>Tem certeza que deseja deletar?</button></div>" );
+                    echo( "<button type='submit' style='background-color:#e79b02;'>Desejo mesmo deletar!</button></div>" );
                     echo( "<div class='container' style='background-color:#f1f1f1'><button type='button' onclick=document.getElementById('id_xp_del$count').style.display='none' class='cancelbtn'>Voltar</button></div>" );
                     echo( "</form></div>" );
 
@@ -563,6 +573,46 @@
                 $atual = 'NÃO';
                 $inicio_e = '';
                 $fim_e = '';
+
+                echo( "<!-- Botão Experiencia - ADD -->" );
+                echo( "<button onclick=document.getElementById('id_xp_add').style.display='block' style='width:auto; background-color:#e79b02;' class='centro'>Adicionar nova experiência</button>" );
+                echo( "<br>" );
+                echo( "<!-- Modal Experiência - ADD-->" );
+                echo( "<div id='id_xp_add' class='modal'>" );
+                echo( "<form name='form_xp_add' class='modal-content animate' style='width: 35%;' action='./funcoes/adicionar_experiencia.php' method='get'>" );
+                echo( "<center><h2>Adicionar Informações: Experiência</h2></center>" );
+                echo( "<div class='container'>" );
+                echo( "<label for='empresa'><b>Empresa</b></label><br>" );
+                echo( "<input type='text' placeholder='Ex: ArcelorMittal' name='empresa' required><br>" );
+
+                echo( "<label for='cargo'><b>Cargo</b></label><br>" );
+                echo( "<input type='text' placeholder='Ex: Estágio de Analista Funcional' name='cargo' required><br>" );
+
+                echo( "<label for='descricao'><b>Descrição</b></label><br>" );
+                echo( "<input type='text' placeholder='Ex: Atendimento de incidentes SAP SD e Debug ABAP (Máx: 255)' name='descricao' required><br>" );
+
+                echo( "<label for='inicio_e'><b>Início</b></label><br>" );
+                echo( "<input type='date' placeholder='Ex: 01/01/2020' name='inicio_e' required><br>" );
+
+                echo( "<label for='fim_e'><b>Fim</b></label><br>" );
+                echo( "<input type='date' placeholder='Ex: 31/12/2020' name='fim_e' id='fim_e' required><br>" );
+
+                echo( "<label for='atual'><b>Atual</b></label><br>" );
+                echo( "<select class='atual' id='atual' name='atual' onchange='func_atual();'>" );
+
+                if( $value['atual'] == 1 ){
+                    echo ('<option selected value="1">SIM</option>');
+                    echo ('<option value="0">NÃO</option>');
+                }else{
+                    echo ('<option value="1">SIM</option>');
+                    echo ('<option selected value="0">NÃO</option>');
+                }
+
+                echo( "</select>" );
+                echo( "<button type='submit' style='background-color:#e79b02;'>Salvar</button></div>" );
+                echo( "<div class='container' style='background-color:#f1f1f1;'>" );
+                echo( "<button type='button' onclick=document.getElementById('id_xp_add').style.display='none' class='cancelbtn'>Voltar</button>" );
+                echo( "</div></form></div>" );
 
                 echo( '<h2>Experiência</h2>' );
                 echo( "<p><b>Empresa: </b><span>$empresa</span></p>" );
@@ -587,6 +637,5 @@
 </footer>
 
 <script language="javascript" type="text/javascript" src="./js/perfil.js"></script>
-
 </body>
 </html>

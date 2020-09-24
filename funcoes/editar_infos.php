@@ -6,7 +6,7 @@
     include("./conexao.php");
     $conn = conexaoPg();
 
-    $nome     = pg_escape_string( trim($_REQUEST['nome']) );
+    $nome       = pg_escape_string( trim($_REQUEST['nome']) );
     $sobrenome  = pg_escape_string( trim($_REQUEST['sobrenome']) );
     $email      = pg_escape_string( trim($_REQUEST['email']) );
 

@@ -42,8 +42,12 @@
         return $rows;
     }
 
-    function cadastroAcademicoUsuario( $conn, $id, $formacao, $grau, $status, $curso, $instituicao, $ead){
-        $sql = "insert into academico( fk_id_pessoa, formacao, grau, status, curso, instituicao, ead ) values ( '$id', '$formacao', '$grau', '$status', '$curso', '$instituicao', $ead);";
+    function cadastroAcademicoUsuario( $conn, $id, $formacao, $grau, $status, $curso, $instituicao, $ead, $inicio, $fim ){
+        if( $inicio == 0 & $fim == 0 ){
+            $sql = "insert into academico( fk_id_pessoa, formacao, grau, status, curso, instituicao, ead ) values ( '$id', '$formacao', '$grau', '$status', '$curso', '$instituicao', $ead );";
+        }else{
+            $sql = "insert into academico( fk_id_pessoa, formacao, grau, status, curso, instituicao, ead, inicio, fim ) values ( '$id', '$formacao', '$grau', '$status', '$curso', '$instituicao', $ead, '$inicio', '$fim' );";
+        }
         $result = pg_query( $conn, $sql );
         $rows   = pg_affected_rows( $result );
         return $rows;
@@ -83,7 +87,16 @@
     ////////////////////////////////////////////////////////////////////////////
 
 
-    /////////////////////////////////////////////////////// GET DADOS PERFIL 
+    /////////////////////////////////////////////////////// GET DADOS PERFIL
+    function pegaEmails ( $conn ){
+        $sql = "select email from pessoa;";
+        $result = pg_query( $conn, $sql );
+        if( $result ){
+            $rs = pg_fetch_all( $result );
+            return $rs;
+        }
+    }
+
     function pegaInfosPessoa ( $conn, $id ){
         $sql = "select nome, sobrenome, email, senha, foto_pessoa, destino_foto_pessoa from pessoa where id_pessoa = $id;";
         $result = pg_query( $conn, $sql );
