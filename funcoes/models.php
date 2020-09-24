@@ -250,6 +250,34 @@
         }
     }
 
+    // function buscaPessoas( $conn ){
+    //     $sql = "select concat(nome,' ',sobrenome) as nometodo from pessoa;";
+    //     $result = pg_query( $conn, $sql );
+    //     if( $result ){
+    //         $rs = pg_fetch_all($result);
+    //         return $rs;
+    //     }
+    // }
+
+
+    function buscaPessoas_off( $conn ){
+        $sql = "select nome_todo from pessoas;";
+        $result = pg_query( $conn, $sql );
+        if( $result ){
+            $rs = pg_fetch_all($result);
+            return $rs;
+        }
+    }
+
+    function pegaPessoas_off( $conn, $pessoa ){
+        $sql = "select id_pessoa from pessoas where nome_todo = '$pessoa';";
+        $result = pg_query( $conn, $sql );
+        if( $result ){
+            $rs = pg_fetch_assoc($result);
+            return $rs;
+        }
+    }
+
         // function createPerguntaForum( $conn){
     //     $sql = "create table perguntaForum(
     //         id_pergunta serial,

@@ -1,25 +1,23 @@
 <?php
     
-    // session_start();
+    include("./models.php");
+    include("./conexao.php");
+    $conn = conexaoPg();
 
-    // include("./models.php");
-    // include("./conexao.php");
-    // $conn = conexaoPg();
-
-    // if (isset($_GET['id_user'])){
-    //     $id_user = $_GET['id_user'];
-    // }else{
-    //     $id_user = null;
-    // }
-
-    // $rows = buscaPessoa_on($conn, $id_user);
+    $pessoa = pg_escape_string( trim($_REQUEST['pessoa']) );
+    strtolower($pessoa);
     
-    // unset($conn);
-    // var_dump($rows); 
-    // if( $rows == 1 ){
-    //     header("Location: ../perfil_user.php");
-    // }else{
-    //     header("Location: ../feed.php");
-    // }
+    $rows = pegaPessoas_off($conn, $pessoa);
+    
+    unset($conn);
+    
+    if( $rows ){
+        $pessoa_encontrada = $rows["id_pessoa"];
+        session_start();
+        $_SESSION["pessoa_encontrada"] = $pessoa_encontrada;
+        header("Location: ../perfil_users.php");
+    }else{
+        header("Location: ../perfil_users.php");
+    }
 
 ?>

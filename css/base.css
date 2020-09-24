@@ -7,8 +7,8 @@ body{
     "header header header aside"
     "main main main aside"
     "footer footer footer aside";
-    grid-template-columns: auto auto auto auto;
-    grid-template-rows: auto 100vh auto;
+    grid-template-columns: 25% 25% 25% auto;
+    grid-template-rows: 0px auto 50px;
     margin: 0 auto;
 }
 

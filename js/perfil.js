@@ -76,6 +76,28 @@ function func_atual_edit(count){
     }
 
 }
+
+function procura_pessoa() {
+  var pessoa_pesquisada = form_busca_pessoa.pessoa.value.toLowerCase();
+  var pessoas = form_busca_pessoa.lista_pessoas.value.toLowerCase();
+  var pessoa = "";
+  for (var i = 0; i < pessoas.length; i++) {
+    if(pessoas.charAt(i) != "|"){
+      if(pessoa == ""){
+        pessoa = pessoas.charAt(i);
+      }else{
+        pessoa += pessoas.charAt(i);
+      }
+    }else{
+      if (pessoa == pessoa_pesquisada){
+        return true;
+      }
+      pessoa = "";
+    }
+  }
+  alert("Não encontramos ela :/");
+  return false;
+};
 //////////////////////////////////////////////////////////////////////////////
 
 /*

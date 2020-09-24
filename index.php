@@ -8,7 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/base.css">
-    <title>Tech Ladies: Feed</title>
+    <title>Tech Ladies</title>
 </head>
 
 <header>
@@ -35,13 +35,13 @@
                 fóruns, encontre sua vaga perfeita.<br>
             </p>
             <br><br><br> 
-            <button class="botao" onclick="window.location.href = 'login.html'">Comece já</button>
+            <button class="botao" onclick="window.location.href = 'login.php'">Comece já</button>
             <br><br><br>    
             <p>
-                <b><a href="cadastro.html" target="_blank"><img src="imagens/mala.png"> Anuncie uma vaga </a></b>
-                <b><a href="cadastro.html" target="_blank"><img src="imagens/lupao.png"> Empregos e estágios </a></b>
-                <b><a href="cadastro.html" target="_blank"><img src="imagens/cal.png"> Encontre eventos </a></b>
-                <b><a href="cadastro.html" target="_blank"><img src="imagens/adPe.png">Conecte-se a colegas </a></b>
+                <b><a href="cadastro.php" target="_blank"><img src="imagens/mala.png"> Anuncie uma vaga </a></b>
+                <b><a href="cadastro.php" target="_blank"><img src="imagens/lupao.png"> Empregos e estágios </a></b>
+                <b><a href="cadastro.php" target="_blank"><img src="imagens/cal.png"> Encontre eventos </a></b>
+                <b><a href="perfil_users.php" target="_blank"><img src="imagens/adPe.png">Conecte-se a colegas </a></b>
             </p>
         </div>
     </main>

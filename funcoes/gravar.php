@@ -25,7 +25,7 @@
         unset($conn);
         header("Location: ../feed.php");
     }else{
-        header("Location: ../cadastro.html");
+        header("Location: ../cadastro.php");
     }
 
 ?>
