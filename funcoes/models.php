@@ -142,6 +142,62 @@
         return $rows;
     }
 
+<<<<<<< Updated upstream
+=======
+    function pegaPerguntas( $conn ){
+        $sql = "select id_pergunta as id, titulo, corpo, tags from perguntaForum";
+        $result = pg_query( $conn, $sql );
+        if( $result ){
+            $rs = pg_fetch_all($result);
+            return $rs;
+        }
+    }
+
+    function criarResposta($conn, $id_pergunta, $resposta){
+        $sql = "insert into respostaForum(fk_id_pergunta, resposta) values ( '$id_pergunta', '$resposta');";
+        $result = pg_query( $conn, $sql );
+        $rows   = pg_affected_rows($result);
+        return $rows;
+    }
+
+    function pegaRespostas( $conn, $id_pergunta ){
+        $sql = "select id_resposta as id, fk_id_pergunta as id_pergunta, resposta from respostaForum where fk_id_pergunta=$id_pergunta";
+        $result = pg_query( $conn, $sql );
+        if( $result ){
+            $rs = pg_fetch_all($result);
+            return $rs;
+        }
+    }
+
+    // BUSCA PERFIL DE USUÁRIO
+    function buscaPessoa_on( $conn, $id_user ){
+        $sql = "select concat(nome,sobrenome) as nome, email, empresa, cargo, descricao, atual, e.inicio as inicio_emprego, e.fim as fim_emprego, formacao, grau, status, curso, instituicao, ead, a.inicio as inicio_curso, a.fim as fim_curso from pessoa as p inner join experiencia as e on (p.id_pessoa = e.fk_id_pessoa) inner join academico as a on (p.id_pessoa = a.fk_id_pessoa) where id_pessoa = $id_user;";
+        $result = pg_query( $conn, $sql );
+        if( $result ){
+            $rs = pg_fetch_all($result);
+            return $rs;
+        }
+    }
+
+    // function buscaPessoas( $conn ){
+    //     $sql = "select concat(nome,' ',sobrenome) as nometodo from pessoa;";
+    //     $result = pg_query( $conn, $sql );
+    //     if( $result ){
+    //         $rs = pg_fetch_all($result);
+    //         return $rs;
+    //     }
+    // }
+
+
+    function buscaPessoas_off( $conn ){
+        $sql = "select nome_todo from pessoas;";
+        $result = pg_query( $conn, $sql );
+        if( $result ){
+            $rs = pg_fetch_all($result);
+            return $rs;
+        }
+    }
+>>>>>>> Stashed changes
 
     // function createPerguntaForum( $conn){
     //     $sql = "create table perguntaForum(
@@ -170,6 +226,7 @@
     //     return $rows;
     // }
 
+<<<<<<< Updated upstream
     function criarPergunta($conn, $titulo, $corpo, $tags){
         $sql = "insert into perguntaForum(titulo, corpo, tags) values ( '$titulo', '$corpo', '$tags');";
         $result = pg_query( $conn, $sql );
@@ -201,5 +258,8 @@
             return $rs;
         }
     }
+=======
+
+>>>>>>> Stashed changes
 
 ?>
