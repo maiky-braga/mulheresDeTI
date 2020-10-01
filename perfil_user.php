@@ -90,7 +90,7 @@
                 echo( "<p><b>Insituição: </b><span>$instituicao</span></p>");
                 echo( "<p><b>EAD: </b><span>$ead</span></p>");
                 echo( " <p><b>Início: </b><span>$academico_inicio</span></p>");
-                echo( " <p><b>Fim: </b><span>$academico_fim</span></p>");
+                echo( " <p><b>Fim: </b><span>$academico_fim</span></p><br>");
             }     
         } 
         ?>

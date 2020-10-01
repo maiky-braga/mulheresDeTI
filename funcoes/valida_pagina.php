@@ -3,7 +3,7 @@
     function validaHome(){
         session_start();
         if( !(isset( $_SESSION["login"] ) && $_SESSION["login"]) ){
-            header("Location: ../");
+            header("Location: ./index.php");
         }
     }
 

@@ -134,7 +134,7 @@
     }
 
     function pegaPosts( $conn ){
-        $sql = "select id_pessoa, concat(nome,' ',sobrenome) as nome, descricao as desc, TO_CHAR(data, 'DD/MM/YYYY HH24:MI') as data from post inner join pessoa as p on post.fk_id_pessoa = p.id_pessoa order by data desc";
+        $sql = "select id_pessoa, concat(nome,' ',sobrenome) as nome, descricao as desc, TO_CHAR(data, 'DD/MM/YYYY HH24:MI') as datas from post inner join pessoa as p on post.fk_id_pessoa = p.id_pessoa order by data desc";
         $result = pg_query( $conn, $sql );
         if( $result ){
             $rs = pg_fetch_all( $result );

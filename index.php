@@ -38,10 +38,10 @@
             <button class="botao" onclick="window.location.href = 'login.php'">Comece já</button>
             <br><br><br>    
             <p>
-                <b><a href="cadastro.php" target="_blank"><img src="imagens/mala.png"> Anuncie uma vaga </a></b>
-                <b><a href="cadastro.php" target="_blank"><img src="imagens/lupao.png"> Empregos e estágios </a></b>
-                <b><a href="cadastro.php" target="_blank"><img src="imagens/cal.png"> Encontre eventos </a></b>
-                <b><a href="perfil_users.php" target="_blank"><img src="imagens/adPe.png">Conecte-se a colegas </a></b>
+                <b><a href="cadastro.php"><img src="imagens/mala.png"> Anuncie uma vaga </a></b>
+                <b><a href="cadastro.php"><img src="imagens/lupao.png"> Empregos e estágios </a></b>
+                <b><a href="cadastro.php"><img src="imagens/cal.png"> Encontre eventos </a></b>
+                <b><a href="perfil_users.php"><img src="imagens/adPe.png">Conecte-se a colegas </a></b>
             </p>
         </div>
     </main>

@@ -1,5 +1,6 @@
 /*CADASTRO LOGIN*/
 body{
+    /* position: relative; */
     display: grid;
     font-family: Calibri;
     /* grid-gap: 0.2rem; */
@@ -180,7 +181,7 @@ form{
     font-size:14px;
     border:none;
     height:32px;
-    width:260px;
+    width:240px;
 }
 
 .index h1{

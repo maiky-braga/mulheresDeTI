@@ -51,7 +51,7 @@
                 $id_user = $value['id_pessoa'];
                 $nome = $value['nome'];
                 $desc = $value['desc'];
-                $data = $value['data'];
+                $data = $value['datas'];
                 echo("<div style='background: #f5f4f2; border-radius: 4px; border: 1px solid #333; padding: 10px;'>");
                 echo("<a href='perfil_user.php?id_user=$id_user' style='text-decoration: none; color:#e79b02;'><b>$nome</b></a>");
                 echo(" | $data </b> <br><br> $desc </div>");

@@ -143,7 +143,7 @@
                 echo( "<p>É rápido e fácil.</p><hr>" );
                 echo( "<form name='form_busca_pessoa' method='GET' action='./funcoes/buscar_pessoa.php'" );
                 echo( "<br><br>" );
-                echo( "<input type='text' class='input_css' name='pessoa' placeholder='Ex: Laila Arruda' id='pessoa'>" );
+                echo( "<input type='text' class='input_css' name='pessoa' placeholder='Ex: Laila Arruda' id='pessoa' value=''>" );
                 echo( "<br><br>" );
                 echo( "<input type='hidden' id='lista_pessoas' value='<?php echo($lista_pessoas); ?>'>" );
                 echo( "<input type='submit' class='botao' value='Pesquisar' onclick='return procura_pessoa()'>" );

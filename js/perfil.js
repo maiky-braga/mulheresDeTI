@@ -95,7 +95,9 @@ function procura_pessoa() {
       pessoa = "";
     }
   }
-  alert("Não encontramos ela :/");
+  if (pessoa_pesquisada != ""){
+    alert("Não encontramos ela :/");
+  }
   return false;
 };
 //////////////////////////////////////////////////////////////////////////////
