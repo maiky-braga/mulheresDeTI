@@ -1,46 +1,36 @@
-<<<<<<< Updated upstream
 <?php
     session_start();
 
     include("./models.php");
     include("./conexao.php");
 
-    $resposta = pg_escape_string( trim($_REQUEST['responder'])     );
-    $idPergunta = pg_escape_string( trim($_REQUEST['vai'])     );
-
     $conn = conexaoPg();
-    $rows = criarResposta($conn, $idPergunta, $resposta);
+    $perguntas = pegaPerguntas($conn);
 
+    echo $perguntas;
+
+    // echo $_REQUEST['titulo'];
+    // echo $_REQUEST['corpo'];
+    // echo $_REQUEST['tags'];
+
+    // $pergunta = createPerguntaForum($conn);
+    // $resposta = createRespostaForum($conn);
+
+
+    // $titulo = pg_escape_string( trim($_REQUEST['titulo'])     );
+    // $corpo = pg_escape_string( trim($_REQUEST['corpo'])     );
+    // $tags = pg_escape_string( trim($_REQUEST['tags'])     );
+
+    // $rows = criarPergunta($conn, $titulo, $corpo, $tags);
+
+    // $posts = pegaPosts($conn);
     
     unset($conn);
 
-    if( $rows == 1 ){
+    if( $perguntas == 1 ){
         header("Location: ../forum.php");
     }else{
         header("Location: ../forum.php");
     }
 
-=======
-<?php
-    session_start();
-
-    include("./models.php");
-    include("./conexao.php");
-
-    $resposta = pg_escape_string( trim($_REQUEST['responder'])     );
-    $idPergunta = pg_escape_string( trim($_REQUEST['vai'])     );
-
-    $conn = conexaoPg();
-    $rows = criarResposta($conn, $idPergunta, $resposta);
-
-    
-    unset($conn);
-
-    if( $rows == 1 ){
-        header("Location: ../forum.php");
-    }else{
-        header("Location: ../forum.php");
-    }
-
->>>>>>> Stashed changes
 ?>
