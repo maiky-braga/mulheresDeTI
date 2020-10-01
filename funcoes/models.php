@@ -186,4 +186,20 @@
         }
     }
 
+    function criarResposta($conn, $id_pergunta, $resposta){
+        $sql = "insert into respostaForum(fk_id_pergunta, resposta) values ( '$id_pergunta', '$resposta');";
+        $result = pg_query( $conn, $sql );
+        $rows   = pg_affected_rows($result);
+        return $rows;
+    }
+
+    function pegaRespostas( $conn, $id_pergunta ){
+        $sql = "select id_resposta as id, fk_id_pergunta as id_pergunta, resposta from respostaForum where fk_id_pergunta=$id_pergunta";
+        $result = pg_query( $conn, $sql );
+        if( $result ){
+            $rs = pg_fetch_all($result);
+            return $rs;
+        }
+    }
+
 ?>

@@ -69,17 +69,24 @@
                 </div>
             </div>
             </div>
-        </div>
 
+
+
+            
+        </div>
     </div>
+
     
         <section id="postagens">
         
             <?php
+            $i = 1;
             $conn = conexaoPg();
             $perguntas = pegaPerguntas($conn);
+            
             if( $perguntas ){
                 foreach( $perguntas as $value ){
+                    
                     $titulo = $value['titulo'];
                     $corpo = $value['corpo'];
                     $tags = $value['tags'];
@@ -92,42 +99,70 @@
                                 <p class='card-text'>$corpo</p>
                             </div>
                             <div class='card-footer text-muted'>
-                                <button type='button' class='btn btn-warning' data-toggle='modal' data-target='#exampleModal2'>
+                                <button type='button' class='btn btn-warning' data-toggle='modal' data-target='#exampleModal$i'>
                                 Responder
                                 </button>
                             </div>
+                            </div>
                         </div>
-                            <div class='modal fade' id='exampleModal2' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
+                        <div class='modal fade' id='exampleModal$i' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
                                 <div class='modal-dialog'>
                                     <div class='modal-content'>
                                     <div class='modal-header'>
+                                    
                                         <h5 class='modal-title' id='exampleModalLabel'>Responder</h5>
                                         <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
                                         <span aria-hidden='true'>&times;</span>
                                         </button>
                                     </div>
                                     <div class='modal-body'>
-                                    <div class='form-group'>
-                                        <label for='exampleFormControlTextarea3'>Ajude a comunidade com sua resposta</label>
-                                        <textarea class='form-control' id='responder' name='responder' rows='5'></textarea>
-                                    </div>
+                                        <form action='./funcoes/respostaForum.php' method='POST'>
+                                            <div class='form-group'>
+                                                <label for='exampleFormControlTextarea3'>Ajude a comunidade com sua resposta</label>
+                                                <textarea class='form-control' id='responder' name='responder' rows='5'></textarea>
+                                            </div>
                                     </div>
                                     <div class='modal-footer'>
-                                        <button type='button' class='btn btn-secondary' data-dismiss='modal'>Fechar sem enviar</button>
-                                        <button type='button' class='btn btn-primary'>Enviar resposta</button>
+                                        <button type='submit' class='btn btn-primary' name='vai' id='vai' value='$id'>Enviar</button>
+                                        </form>
                                     </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        </div>
+
+
+                            
                         ");
+                        $respostas = pegaRespostas($conn, $id);
+                        
+                        if( $respostas ){
+                            echo("<div class='card mt-3' style='background: #f5f4f2;border: 1px solid #333;'>
+                            <h5 class='card-header'>Respostas</h5>
+                            <div class='card-body'>");
+                            foreach( $respostas as $valor ){
+                                $resposta = $valor['resposta'];
+                                $id2 = $valor['id'];
+                                $idpergunta = $valor['id_pergunta'];
+                                echo("
+                                    <p class='card-text'>$resposta</p>
+                                    <br>
+                                ");
+                                
+
+                            }
+                            echo("</div>
+                            </div>
+                        </div>");
+
+                        }
                     echo("<br>");
+                    $i = $i + 1;
                 }
             }
             
             unset($conn);
             ?>
+            
             
 
             
