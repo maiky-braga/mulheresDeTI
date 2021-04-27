@@ -15,9 +15,7 @@ Este projeto tem o objetivo de desenvolver um sistema web para conectar mulheres
 
 ### :art: Layout
 
-Em breve
-
-Prévia: [Balsamiq](https://drive.google.com/file/d/1Loa3J-yBphUmkktoT7zpnm6zWKGIXGy8/view?usp=sharing)
+[Balsamiq](https://drive.google.com/file/d/1Loa3J-yBphUmkktoT7zpnm6zWKGIXGy8/view?usp=sharing)
 
 _________
 
